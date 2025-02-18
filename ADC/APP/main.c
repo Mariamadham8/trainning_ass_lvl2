@@ -63,8 +63,8 @@ int main()
 			if(flag==1)
 			{
 					itoa(adcread, adcString, 10);  // Convert ADC value to a string in base 10
-					LCD_enuSendCommand(0x01);      // Clear the LCD before displaying new value
-					LCD_enuSendString(adcString);  // Display the string on the LCD
+					LCD_enuSendCommand(0x01);      
+					LCD_enuSendString(adcString); 
 					flag = 0;
 			}
 
