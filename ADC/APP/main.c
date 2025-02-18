@@ -25,7 +25,11 @@
 #include"../HAL/LCD/LCD_int.h"
 #include"../HAL/LCD/LCD_config.h"
 
+#include"../HAL/LM35/LM35_int.h"
+#include"../HAL/LM35/LM35_config.h"
+
 extern EXTI_t  EXTI_AstrEXTIConfig[3];
+extern LM35_t Copy_Astr[1];
 
 u8  flag=0;
 void read(void *Param)
@@ -56,13 +60,13 @@ int main()
 
 		GIE_enuEnable();
 		LCD_enuInit();
-
-
+		LM35_Init(Copy_Astr);
 		while(1){
-
+			f32 T;
 			if(flag==1)
 			{
-					itoa(adcread, adcString, 10);  // Convert ADC value to a string in base 10
+				    LM35_ReadTemp( adcread,&T);
+					itoa(T, adcString, 10);  // Convert ADC value to a string in base 10
 					LCD_enuSendCommand(0x01);      
 					LCD_enuSendString(adcString); 
 					flag = 0;
